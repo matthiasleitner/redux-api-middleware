@@ -140,7 +140,7 @@ It must be one of the strings `GET`, `HEAD`, `POST`, `PUT`, `PATCH`, `DELETE` or
 
 The body of the API call.
 
-`redux-api-middleware` uses [`isomorphic-fetch`](https://github.com/matthew-andrews/isomorphic-fetch) to make the API call. `[RSAA].body` should hence be a valid body according to the [fetch specification](https://fetch.spec.whatwg.org). In most cases, this will be a JSON-encoded string or a [`FormData`](https://developer.mozilla.org/en/docs/Web/API/FormData) object.
+`redux-api-middleware` uses the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to make the API call. `[RSAA].body` should hence be a valid body according to the [fetch specification](https://fetch.spec.whatwg.org). In most cases, this will be a JSON-encoded string or a [`FormData`](https://developer.mozilla.org/en/docs/Web/API/FormData) object.
 
 #### `[RSAA].headers`
 
@@ -162,7 +162,7 @@ It may also be a function taking the state of your Redux store as its argument, 
 
 #### `[RSAA].options`
 
-The fetch options for the API call. See [node-fetch](https://github.com/bitinn/node-fetch#options) for more information.
+The fetch options for the API call. See [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for more information.
 
 It is usually an object with the options keys/values. For example, you can specify a network timeout for node.js code
 in the following way.
@@ -215,7 +215,7 @@ The `[RSAA].types` property controls the output of `redux-api-middleware`. The s
 
   But errors may pop up at this stage, for several reasons:
   - `redux-api-middleware` has to call those of `[RSAA].bailout`, `[RSAA].endpoint` and `[RSAA].headers` that happen to be a function, which may throw an error;
-  - `isomorphic-fetch` may throw an error: the RSAA definition is not strong enough to preclude that from happening (you may, for example, send in a `[RSAA].body` that is not valid according to the fetch specification &mdash; mind the SHOULDs in the [RSAA definition](#redux-standard-api-calling-actions));
+  - `fetch` may throw an error: the RSAA definition is not strong enough to preclude that from happening (you may, for example, send in a `[RSAA].body` that is not valid according to the fetch specification &mdash; mind the SHOULDs in the [RSAA definition](#redux-standard-api-calling-actions));
   - a network failure occurs (the network is unreachable, the server responds with an error,...).
 
   If such an error occurs, a different *request* FSA will be dispatched (*instead* of the one described above). It will contain the following properties:
@@ -582,7 +582,7 @@ The optional `[RSAA].headers` property MUST be a plain JavaScript object or a fu
 #### `[RSAA].options`
 
 The optional `[RSAA].options` property MUST be a plain JavaScript object or a function. In the second case, the function SHOULD return a plain JavaScript object.
-The options object can contain any options supported by [node-fetch](https://github.com/bitinn/node-fetch#options).
+The options object can contain any options supported by the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
 #### `[RSAA].credentials`
 
