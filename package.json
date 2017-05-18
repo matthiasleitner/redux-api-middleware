@@ -50,5 +50,6 @@
     "README.md",
     "LICENSE.md",
     "lib/"
+    "test/"
   ]
 }
